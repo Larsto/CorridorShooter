@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed;
+    public float moveSpeed, gravityModifier, jumpPower, runSpeed;
     public CharacterController charCon;
 
     private Vector3 moveInput;
@@ -14,6 +14,13 @@ public class PlayerController : MonoBehaviour
     public float mouseSensitivity;
     public bool invertX;
     public bool invertY;
+
+    private bool canJump;
+    private bool canDoubleJump;
+    public Transform groundCheckPoint;
+    public LayerMask whatIsGround;
+
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +33,51 @@ public class PlayerController : MonoBehaviour
         //moveInput.x = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         //moveInput.z = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 
-        Vector3 vertMove = transform.forward * Input.GetAxis("Vertical");
-        Vector3 horiMove = transform.right * Input.GetAxis("Horizontal");
+        //store y velocity
+        float yStore = moveInput.y;
+
+        Vector3 vertMove = transform.forward * Input.GetAxisRaw("Vertical");
+        Vector3 horiMove = transform.right * Input.GetAxisRaw("Horizontal");
 
         moveInput = horiMove + vertMove;
         moveInput.Normalize();
-        moveInput = moveInput * moveSpeed;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveInput = moveInput * runSpeed;
+        } else
+        {
+            moveInput = moveInput * moveSpeed;
+        }
+     
+
+        moveInput.y = yStore;
+
+        moveInput.y += Physics.gravity.y * gravityModifier * Time.deltaTime;
+
+        if (charCon.isGrounded)
+        {
+            moveInput.y = Physics.gravity.y * gravityModifier * Time.deltaTime;
+        }
+
+        canJump = Physics.OverlapSphere(groundCheckPoint.position, .25f, whatIsGround).Length > 0;
+
+        //Handel Jump
+
+        if (canJump)
+        {
+            canDoubleJump = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        {
+            moveInput.y = jumpPower;
+            canDoubleJump = true;
+        } else if (Input.GetKeyDown(KeyCode.Space) && canDoubleJump)
+        {
+            moveInput.y = jumpPower;
+            canDoubleJump = false;
+        }
 
         charCon.Move(moveInput * Time.deltaTime);
 
@@ -50,5 +96,8 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
 
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
+
+        anim.SetFloat("moveSpeed", moveInput.magnitude);
+        anim.SetBool("onGround", canJump);
     }
 }
