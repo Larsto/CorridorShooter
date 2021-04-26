@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
     public float moveSpeed, gravityModifier, jumpPower, runSpeed;
     public CharacterController charCon;
 
@@ -24,6 +26,12 @@ public class PlayerController : MonoBehaviour
 
     public GameObject bulle;
     public Transform firePoint;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
