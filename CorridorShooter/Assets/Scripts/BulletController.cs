@@ -49,6 +49,7 @@ public class BulletController : MonoBehaviour
         if (other.gameObject.tag == "Player" && damagePlayer)
         {
             Debug.Log("Player Hit at " + transform.position);
+            PlayerHealtController.instance.DamagePlayer(damage);
         }
 
         Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
