@@ -24,8 +24,17 @@ public class PlayerController : MonoBehaviour
 
     public Animator anim;
 
-    public GameObject bulle;
+    //public GameObject bullet;
     public Transform firePoint;
+
+    public Gun activeGun;
+    public List<Gun> allGuns = new List<Gun>();
+    public List<Gun> unlockableGuns = new List<Gun>();
+    public int currentGun;
+
+    public Transform adsPoint, gunHolder;
+    private Vector3 gunStartPos;
+    public float adsSpeed = 2f;
 
     private void Awake()
     {
@@ -35,7 +44,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentGun--;
+        SwitchGun();
+
+        gunStartPos = gunHolder.localPosition;
     }
 
     // Update is called once per frame
@@ -108,8 +120,9 @@ public class PlayerController : MonoBehaviour
 
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
 
-        //handle shooting
-        if (Input.GetMouseButtonDown(0))
+        //Handle shooting
+        //Single fire
+        if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0)
         {
             RaycastHit hit;
             if(Physics.Raycast(camTrans.position, camTrans.forward, out hit, 50f))
@@ -125,10 +138,100 @@ public class PlayerController : MonoBehaviour
             }
 
 
-            Instantiate(bulle, firePoint.position, firePoint.rotation);
+            //Instantiate(bulle, firePoint.position, firePoint.rotation);
+            FireShot();
+        }
+        //Autofire
+        if (Input.GetMouseButton(0) && activeGun.canAutoFire)
+        {
+            if(activeGun.fireCounter <= 0)
+            {
+                FireShot();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            SwitchGun();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            CameraController.instance.ZoomIn(activeGun.zoomAmount);
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            gunHolder.position = Vector3.MoveTowards(gunHolder.position, adsPoint.position, adsSpeed * Time.deltaTime);
+        }
+        else
+        {
+            gunHolder.localPosition = Vector3.MoveTowards(gunHolder.localPosition, gunStartPos, adsSpeed * Time.deltaTime);
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            CameraController.instance.ZoomOut();
         }
 
         anim.SetFloat("moveSpeed", moveInput.magnitude);
         anim.SetBool("onGround", canJump);
+    }
+
+    public void FireShot()
+    {
+        if(activeGun.currentAmmo > 0)
+        {
+            activeGun.currentAmmo--;
+            Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation);
+
+            activeGun.fireCounter = activeGun.fireRate;
+
+            UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+        }
+    }
+
+    public void SwitchGun()
+    {
+        
+        activeGun.gameObject.SetActive(false);
+        currentGun++;
+
+        if(currentGun >= allGuns.Count)
+        {
+            currentGun = 0;
+        }
+
+        activeGun = allGuns[currentGun];
+        activeGun.gameObject.SetActive(true);
+
+        UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+
+        firePoint.position = activeGun.firepoint.position;
+    }
+
+    public void AddGun(string gunToAdd)
+    {
+        bool gunUnlocked = false;
+
+        if(unlockableGuns.Count > 0)
+        {
+            for(int i = 0; i < unlockableGuns.Count; i++)
+            {
+                if(unlockableGuns[i].gunName == gunToAdd)
+                {
+                    gunUnlocked = true;
+                    allGuns.Add(unlockableGuns[i]);
+                    unlockableGuns.RemoveAt(i);
+
+                    i = unlockableGuns.Count;
+                }
+            }
+        }
+        if(gunUnlocked)
+        {
+            currentGun = allGuns.Count - 2;
+            SwitchGun();
+        }
     }
 }

@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c498252c88899841908b2af7616a7c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 5
+  currentHealth: 20
 --- !u!114 &2949643395621395390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79e6c8949ef542469b79f0108c27ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToChase: 10
+  distanceToChase: 50
   distanceToLose: 15
   distanceToStop: 2
   agent: {fileID: 2949643395621395389}

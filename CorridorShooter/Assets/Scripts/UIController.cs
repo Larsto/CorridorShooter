@@ -8,7 +8,7 @@ public class UIController : MonoBehaviour
     public static UIController instance;
 
     public Slider healthSlider;
-    public Text healtText;
+    public Text healtText, ammoText;
     // Start is called before the first frame update
     private void Awake()
     {
