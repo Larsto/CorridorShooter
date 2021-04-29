@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afabbfe73e3fa624aad65c376ea3ba5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: 0
-  Enemy: 1
+  findPlayer: 1
+  findEnemy: 0
   closestPlayer: {fileID: 0}
   closestEnemy: {fileID: 0}
 --- !u!1 &2949643396242784655

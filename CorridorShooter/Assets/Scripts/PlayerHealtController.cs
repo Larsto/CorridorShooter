@@ -38,6 +38,7 @@ public class PlayerHealtController : MonoBehaviour
     {
         if(invincCounter <= 0)
         {
+            Debug.Log(damageAmount);
             currentHealth -= damageAmount;
 
             UIController.instance.ShowDamage();

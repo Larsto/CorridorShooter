@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class FindClosest : MonoBehaviour
 {
-    public bool Player;
-    public bool Enemy;
+    public bool findPlayer;
+    public bool findEnemy;
 
     [HideInInspector]
     public PlayerHealtController closestPlayer = null;
-    [HideInInspector]
+    [HideInInspector] 
     public EnemyController closestEnemy = null;
 
     // Start is called before the first frame update
@@ -21,11 +21,11 @@ public class FindClosest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Enemy)
+        if (findPlayer)
         {
             FindClosestPlayer();
         }
-        if(Player)
+        if(findEnemy)
         {
             FindClosestEnemy();
         }
