@@ -16,8 +16,8 @@ TagManager:
   - Ground
   - Bullets
   - TriggerZones
-  - 
-  - 
+  - PostProsessing
+  - Pickup
   - 
   - 
   - 

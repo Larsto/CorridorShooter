@@ -14,6 +14,8 @@ public class AmmoPickupScript : MonoBehaviour
             Destroy(gameObject);
 
             collected = true;
+
+            AudioManager.instace.PlaySFX(3);
         }
     }
 }

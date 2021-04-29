@@ -190,7 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToChase: 50
   distanceToLose: 15
-  distanceToStop: 2
+  distanceToStop: 10
   agent: {fileID: 2949643395621395389}
   keepChasingTime: 2
   bullet: {fileID: 6039484976065753647, guid: 5dd6df296e6d5144b9b8657479e3bf2e, type: 3}
