@@ -10,7 +10,7 @@ public class AmmoPickupScript : MonoBehaviour
         if(other.tag == "Player" && !collected)
         {
             //Give Ammo
-            PlayerController.instance.activeGun.GetAmmo();
+            //PlayerController.instance.activeGun.GetAmmo();
             Destroy(gameObject);
 
             collected = true;

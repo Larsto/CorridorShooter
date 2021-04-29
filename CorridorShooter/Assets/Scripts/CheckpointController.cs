@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CheckpointController : MonoBehaviour
 {
+    /*
     public string cpName;
 
 
@@ -38,4 +39,5 @@ public class CheckpointController : MonoBehaviour
             Debug.Log("Player hit " + cpName);
         }
     }
+    */
 }
