@@ -11,7 +11,8 @@ public class WeaponPickupScript : MonoBehaviour
         if (other.tag == "Player" && !collected)
         {
             //Give Ammo
-            PlayerController.instance.AddGun(theGun);
+            //PlayerController.instance.AddGun(theGun);
+            other.gameObject.GetComponent<PlayerController>().AddGun(theGun);
             Destroy(gameObject);
 
             collected = true;

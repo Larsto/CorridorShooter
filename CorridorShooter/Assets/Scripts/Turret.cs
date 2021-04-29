@@ -12,6 +12,8 @@ public class Turret : MonoBehaviour
     public Transform gun, firPoint;
 
     public float rotateSpeed = 45f;
+
+    public FindClosest closest;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +23,9 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToTraget)
+        if(Vector3.Distance(transform.position, closest.closestPlayer.transform.position) < rangeToTraget)
         {
-            gun.LookAt(PlayerController.instance.transform.position + new Vector3(0f, 1.2f, 0f));
+            gun.LookAt(closest.closestPlayer.transform.position + new Vector3(0f, 1.2f, 0f));
 
             shotCounter -= Time.deltaTime;
 

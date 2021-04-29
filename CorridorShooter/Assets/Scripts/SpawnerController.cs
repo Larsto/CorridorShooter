@@ -6,9 +6,7 @@ public class SpawnerController : MonoBehaviour
 {
     public GameObject enemy;
 
-    private Vector3 targetPoint;
-
-    public float spawnRate, waitBetweenSpawns = 2f, spawnTime = 2f, distanceToSpawn;
+    public float spawnRate, waitBetweenSpawns = 2f ,spawnTime = 2f;
     private float spawnCount, spawnWaitCounter, spawnTimeCounter;
     // Start is called before the first frame update
     void Start()
@@ -20,9 +18,7 @@ public class SpawnerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetPoint = PlayerController.instance.transform.position;
-        if (Vector3.Distance(transform.position, targetPoint) > distanceToSpawn)
-            if (spawnWaitCounter > 0)
+        if (spawnWaitCounter > 0)
         {
             spawnWaitCounter -= Time.deltaTime;
             if(spawnWaitCounter <= 0)

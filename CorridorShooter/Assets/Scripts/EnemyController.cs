@@ -22,6 +22,7 @@ public class EnemyController : MonoBehaviour
     private float fireCount, shotsWaitCounter, shootTimeCounter;
 
     public Animator anim;
+    public FindClosest closest;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetPoint = PlayerController.instance.transform.position;
+        //targetPoint = PlayerController.instance.transform.position;
+        targetPoint = closest.closestPlayer.transform.position;
         targetPoint.y = transform.position.y;
 
         if (!chasing)
@@ -96,7 +98,8 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                if(PlayerController.instance.gameObject.activeInHierarchy)
+                //if(PlayerController.instance.gameObject.activeInHierarchy)
+                if(closest.gameObject.activeInHierarchy)
                 {
                     shootTimeCounter -= Time.deltaTime;
 
@@ -108,10 +111,13 @@ public class EnemyController : MonoBehaviour
                         {
                             fireCount = fireRate;
 
-                            firePoint.LookAt(PlayerController.instance.transform.position + new Vector3(0f, 1.5f, 0f));
+                            //firePoint.LookAt(PlayerController.instance.transform.position + new Vector3(0f, 1.5f, 0f));
+                            firePoint.LookAt(closest.closestPlayer.transform.position + new Vector3(0f, 1.5f, 0f));
 
                             // check the angle to the player
-                            Vector3 targetDir = PlayerController.instance.transform.position - transform.position;
+                            //Vector3 targetDir = PlayerController.instance.transform.position - transform.position;
+                            Vector3 targetDir = closest.closestPlayer.transform.position - transform.position;
+                            
                             float angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
 
                             if (Mathf.Abs(angle) < 30f)
