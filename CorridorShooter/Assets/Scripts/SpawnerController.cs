@@ -6,8 +6,11 @@ public class SpawnerController : MonoBehaviour
 {
     public GameObject enemy;
 
-    public float spawnRate, waitBetweenSpawns = 2f ,spawnTime = 2f;
+    public float spawnRate, waitBetweenSpawns = 2f ,spawnTime = 2f, spawnDistance = 5f;
     private float spawnCount, spawnWaitCounter, spawnTimeCounter;
+    private Vector3 targetPoint;
+
+    public FindClosest closest;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,29 +21,35 @@ public class SpawnerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spawnWaitCounter > 0)
+        targetPoint = closest.closestPlayer.transform.position;
+        if (Vector3.Distance(transform.position, targetPoint) < spawnDistance)
         {
-            spawnWaitCounter -= Time.deltaTime;
-            if(spawnWaitCounter <= 0)
+            if (spawnWaitCounter > 0)
             {
-                spawnTimeCounter = spawnTime;     
-            }
-        } else
-        {
-            spawnTimeCounter -= Time.deltaTime;
-            if(spawnTimeCounter > 0)
-            {
-                spawnCount -= Time.deltaTime;
-                if(spawnCount <= 0)
+                spawnWaitCounter -= Time.deltaTime;
+                if (spawnWaitCounter <= 0)
                 {
-                    spawnCount = spawnRate;
-                    Instantiate(enemy, transform.position, transform.rotation);
+                    spawnTimeCounter = spawnTime;
                 }
             }
             else
             {
-                spawnWaitCounter = waitBetweenSpawns;
+                spawnTimeCounter -= Time.deltaTime;
+                if (spawnTimeCounter > 0)
+                {
+                    spawnCount -= Time.deltaTime;
+                    if (spawnCount <= 0)
+                    {
+                        spawnCount = spawnRate;
+                        Instantiate(enemy, transform.position, transform.rotation);
+                    }
+                }
+                else
+                {
+                    spawnWaitCounter = waitBetweenSpawns;
+                }
             }
         }
+            
     }
 }

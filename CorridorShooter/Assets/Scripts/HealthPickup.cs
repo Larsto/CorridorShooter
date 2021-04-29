@@ -9,7 +9,8 @@ public class HealthPickup : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            PlayerHealtController.instance.HealPlayer(healAmount);
+            //PlayerHealtController.instance.HealPlayer(healAmount);
+            other.gameObject.GetComponent<PlayerHealtController>().HealPlayer(healAmount);
 
             Destroy(gameObject);
 

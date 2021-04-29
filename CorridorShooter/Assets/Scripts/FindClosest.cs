@@ -7,7 +7,9 @@ public class FindClosest : MonoBehaviour
     public bool Player;
     public bool Enemy;
 
+    [HideInInspector]
     public PlayerHealtController closestPlayer = null;
+    [HideInInspector]
     public EnemyController closestEnemy = null;
 
     // Start is called before the first frame update

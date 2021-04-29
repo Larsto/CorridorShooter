@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 2949643395621395388}
   - component: {fileID: 2949643395621395390}
   - component: {fileID: 2949643395621395389}
+  - component: {fileID: -7071174967238283371}
   m_Layer: 0
   m_Name: EnemyAnim
   m_TagString: Enemy
@@ -199,6 +200,7 @@ MonoBehaviour:
   waitBetweenShots: 2
   timeToShoot: 1
   anim: {fileID: 2949643394408415796}
+  closest: {fileID: -7071174967238283371}
 --- !u!195 &2949643395621395389
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -221,6 +223,22 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-7071174967238283371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2949643395621395335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afabbfe73e3fa624aad65c376ea3ba5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: 0
+  Enemy: 1
+  closestPlayer: {fileID: 0}
+  closestEnemy: {fileID: 0}
 --- !u!1 &2949643396242784655
 GameObject:
   m_ObjectHideFlags: 0
