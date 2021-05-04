@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
 
     public float waitAfterDying = 2f;
 
+    public PlayerController activePlayer;
+    public CameraController activeCamera;
+    public List<PlayerController> allPlayers = new List<PlayerController>();
+    public List<CameraController> allCameras = new List<CameraController>();
+
     private void Awake()
     {
         instance = this;
@@ -17,12 +22,22 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        SwitchPlayer(0);
+        activePlayer = allPlayers[0];
+        activeCamera = allCameras[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            SwitchPlayer(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            SwitchPlayer(1);
+        }
     }
 
     public void PlayerDied()
@@ -34,5 +49,19 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitAfterDying);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void SwitchPlayer(int active)
+    {
+        activePlayer.gameObject.GetComponent<PlayerOverwatch>().enabled = true;
+        activePlayer.gameObject.GetComponent<PlayerController>().enabled = false;
+        activeCamera.gameObject.SetActive(false);
+
+
+        activePlayer = allPlayers[active];
+        activeCamera = allCameras[active];
+        activePlayer.gameObject.GetComponent<PlayerOverwatch>().enabled = false;
+        activePlayer.gameObject.GetComponent<PlayerController>().enabled = true;
+        activeCamera.gameObject.SetActive(true);
     }
 }

@@ -18,8 +18,8 @@ TagManager:
   - TriggerZones
   - PostProsessing
   - Pickup
-  - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 

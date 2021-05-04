@@ -10,6 +10,7 @@ public class PlayerHealtController : MonoBehaviour
 
     public float invincibleLength = 1f;
     private float invincCounter;
+    public UIController playerUI;
 
     private void Awake()
     {
@@ -19,10 +20,12 @@ public class PlayerHealtController : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-
-        UIController.instance.healthSlider.maxValue = maxHealth;
-        UIController.instance.healthSlider.value = currentHealth;
-        UIController.instance.healtText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
+        //UIController.instance.healthSlider.maxValue = maxHealth;
+        //UIController.instance.healthSlider.value = currentHealth;
+        //UIController.instance.healtText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
+        playerUI.healthSlider.maxValue = maxHealth;
+        playerUI.healthSlider.value = currentHealth;
+        playerUI.healtText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
     }
 
     // Update is called once per frame
@@ -38,29 +41,30 @@ public class PlayerHealtController : MonoBehaviour
     {
         if(invincCounter <= 0)
         {
-            Debug.Log(damageAmount);
             currentHealth -= damageAmount;
 
-            UIController.instance.ShowDamage();
-
+            //UIController.instance.ShowDamage();
+            //UIController.instance.healthSlider.value = currentHealth;
+            //UIController.instance.healtText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
             if (currentHealth <= 0)
             {
-                gameObject.SetActive(false);
-
-                currentHealth = 0;
-
                 //GameManager.instance.PlayerDied();
-
+                gameObject.SetActive(false);
+                currentHealth = 0;
+                playerUI.healtText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
+                playerUI.healthSlider.value = currentHealth;
                 AudioManager.instace.StopBGM();
-
                 AudioManager.instace.PlaySFX(5);
                 AudioManager.instace.StopSFX(0);
+            } else
+            {
+                playerUI.ShowDamage();
+                playerUI.healtText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
+                playerUI.healthSlider.value = currentHealth;
+                AudioManager.instace.PlaySFX(0);
+                invincCounter = invincibleLength;
             }
-            AudioManager.instace.PlaySFX(0);
-            invincCounter = invincibleLength;
-
-            UIController.instance.healthSlider.value = currentHealth;
-            UIController.instance.healtText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
+       
         }
     }
 
@@ -73,7 +77,9 @@ public class PlayerHealtController : MonoBehaviour
             currentHealth = maxHealth;
         }
 
-        UIController.instance.healthSlider.value = currentHealth;
-        UIController.instance.healtText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
+        //UIController.instance.healthSlider.value = currentHealth;
+        //UIController.instance.healtText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
+        playerUI.healthSlider.value = currentHealth;
+        playerUI.healtText.text = "HEALTH: " + currentHealth + "/" + maxHealth;
     }
 }

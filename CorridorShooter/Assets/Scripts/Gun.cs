@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
     public float fireCounter;
     public int currentAmmo, pickupAmount;
     public Transform firepoint;
-
+    public UIController playerUI;
     public float zoomAmount;
 
     public string gunName;
@@ -35,6 +35,7 @@ public class Gun : MonoBehaviour
     public void GetAmmo()
     {
         currentAmmo += pickupAmount;
-        UIController.instance.ammoText.text = "AMMO: " + currentAmmo;
+        //UIController.instance.ammoText.text = "AMMO: " + currentAmmo;
+        playerUI.ammoText.text = "AMMO: " + currentAmmo;
     }
 }

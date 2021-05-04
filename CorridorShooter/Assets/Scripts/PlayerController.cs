@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
     public Transform adsPoint, gunHolder;
     private Vector3 gunStartPos;
     public float adsSpeed = 2f;
-
     public GameObject muzzleFlash;
+    public UIController playerUI;
 
     private void Awake()
     {
@@ -191,7 +191,8 @@ public class PlayerController : MonoBehaviour
 
             activeGun.fireCounter = activeGun.fireRate;
 
-            UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+            //UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+            playerUI.ammoText.text = "AMMO: " + activeGun.currentAmmo;
 
             muzzleFlash.SetActive(true);
         }
@@ -211,7 +212,8 @@ public class PlayerController : MonoBehaviour
         activeGun = allGuns[currentGun];
         activeGun.gameObject.SetActive(true);
 
-        UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+        //UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo;
+        playerUI.ammoText.text = "AMMO: " + activeGun.currentAmmo;
 
         firePoint.position = activeGun.firepoint.position;
     }

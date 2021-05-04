@@ -38,7 +38,7 @@ public class EnemyController : MonoBehaviour
     {
         //targetPoint = PlayerController.instance.transform.position;
         targetPoint = closest.closestPlayer.transform.position;
-        targetPoint.y = transform.position.y;
+        //targetPoint.y = transform.position.y;
 
         if (!chasing)
         {

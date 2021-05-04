@@ -47,7 +47,7 @@ public class FindClosest : MonoBehaviour
                 closestEnemy = currentEnemy;
             }
         }
-        Debug.DrawLine (this.transform.position, closestEnemy.transform.position, Color.red);
+        //Debug.DrawLine (this.transform.position, closestEnemy.transform.position, Color.red);
     }
 
     void FindClosestPlayer()
