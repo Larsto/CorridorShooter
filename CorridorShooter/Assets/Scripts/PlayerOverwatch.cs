@@ -9,10 +9,10 @@ public class PlayerOverwatch : MonoBehaviour
     public float rangeToTraget, timeBetweenShots = .5f;
     private float shotCounter;
 
-    public Transform gun, firePoint;
+    public Transform look, firePoint;
     public FindClosest closest;
     public GameObject raycastObject;
-    public bool canShoot;
+    private bool canShoot;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +48,7 @@ public class PlayerOverwatch : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, closest.closestEnemy.transform.position) < rangeToTraget)
             {
-                gun.LookAt(closest.closestEnemy.transform.position);
+                look.LookAt(closest.closestEnemy.transform.position + new Vector3(0f, -1f, 0f));
 
                 shotCounter -= Time.deltaTime;
 
