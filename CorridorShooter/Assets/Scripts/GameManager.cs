@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public List<PlayerController> allPlayers = new List<PlayerController>();
     public List<CameraController> allCameras = new List<CameraController>();
 
+
     private void Awake()
     {
         instance = this;
@@ -23,8 +24,6 @@ public class GameManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         SwitchPlayer(0);
-        activePlayer = allPlayers[0];
-        activeCamera = allCameras[0];
     }
 
     // Update is called once per frame
@@ -37,6 +36,14 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             SwitchPlayer(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            SwitchPlayer(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            SwitchPlayer(3);
         }
     }
 
@@ -53,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     void SwitchPlayer(int active)
     {
+
         activePlayer.gameObject.GetComponent<PlayerOverwatch>().enabled = true;
         activePlayer.gameObject.GetComponent<PlayerController>().enabled = false;
         activeCamera.gameObject.SetActive(false);

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1788328728637777607
+--- !u!1 &1247684688770073176
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1788328728637777605}
-  - component: {fileID: 1788328728637777606}
+  - component: {fileID: 1247684688770073180}
+  - component: {fileID: 1247684688770073178}
+  - component: {fileID: 1247684688770073179}
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
@@ -17,33 +18,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1788328728637777605
+--- !u!4 &1247684688770073180
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1788328728637777607}
+  m_GameObject: {fileID: 1247684688770073176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 17.18}
+  m_LocalPosition: {x: 5.06, y: 1, z: 17.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1788328728637777606
+--- !u!114 &1247684688770073178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1788328728637777607}
+  m_GameObject: {fileID: 1247684688770073176}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a92fd69a2c8cb434d9110eb83acb9753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 2949643395621395335, guid: 489276e0bfa98444885e1005debe1b03, type: 3}
+  enemy: {fileID: 9087520953151701002, guid: e354e1a8354b72d419e7b9eeb8bb2355, type: 3}
   spawnRate: 0.1
   waitBetweenSpawns: 5
   spawnTime: 1
+  distanceToSpawn: 15
+  closest: {fileID: 0}
+--- !u!114 &1247684688770073179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247684688770073176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afabbfe73e3fa624aad65c376ea3ba5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  findPlayer: 1
+  findEnemy: 0
+  closestPlayer: {fileID: 0}
+  closestEnemy: {fileID: 0}
